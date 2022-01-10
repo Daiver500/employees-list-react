@@ -1,4 +1,4 @@
-
+import "./employees-list-item.css"
 
 const EmloyeeListItem = () => { // все класссы, которых нет в css файле идут из bootstrap
   return (
