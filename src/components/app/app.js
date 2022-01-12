@@ -5,7 +5,15 @@ import AppFilter from "../app-filter/app-filter";
 import EmployeesList from "../employees-list/employees-list";
 import EmployeesAddForm from "../app-employees-add-form/app-employees-add-form";
 
-function App() {
+function App() {          // моковые данные 
+  
+  const data = [
+    {name: "Alex" , salary: 800, increase: false},
+    {name: "Ivan" , salary: 300, increase: true},
+    {name: "Petr" , salary: 500, increase: false},
+  ]
+
+
   return (
       <div className="app">
         <AppHeader></AppHeader>
@@ -13,7 +21,7 @@ function App() {
           <SearchPanel></SearchPanel>
           <AppFilter></AppFilter>
         </div>
-        <EmployeesList></EmployeesList>
+        <EmployeesList data={data}></EmployeesList> {/*передаем массив в компонент как props, теперь можно использовать его внутри компонента */}
         <EmployeesAddForm></EmployeesAddForm>
       </div>
   )
