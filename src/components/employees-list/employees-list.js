@@ -4,11 +4,16 @@ import "./employees-list.css"
 const EmployeesList = ({data}) => {   // передаем сюда как аргументы данные с сервера
   
   const elements = data.map((item) => {        // каждый объект массива обозначаем как item
+    const {name, salary, increase, id} = item
+    // const {id, ...itemProps} = item к строке со spread оператором ниже
     return (
-      <EmployeesListItem name={item.name} salary={item.salary} increase={item.increase}></EmployeesListItem> // props из данных с сервера
-      // <EmployeesListItem {...item}></EmployeesListItem> spread оператор разворачивает наш объект
+      <EmployeesListItem key={id} name={name} salary={salary} increase={increase}></EmployeesListItem> // props из данных с сервера
+      // <EmployeesListItem key={id} {...itemProps}></EmployeesListItem> spread оператор разворачивает наш объект
     )
   })
+
+  // key служит для того, чтобы были изменены только те элементы, которые были изменены
+  // ключи должны быть уникальными только для их соседей
 
   return (
       <ul className="employees-list list-group">
@@ -21,3 +26,6 @@ const EmployeesList = ({data}) => {   // передаем сюда как арг
 }
 
 export default EmployeesList; 
+
+// если меняется родитель, то все элементы внутри уничтожаются и переписываются по необходимости
+// если меняется просто элемент(к примеру добавляется класс) изменяется только сам элемент

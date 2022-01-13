@@ -1,6 +1,6 @@
 import "./employees-list-item.css"
 
-const EmloyeeListItem = ({name, salary, increase}) => { // сюда передаем props из EmployeesList (они ниже)
+const EmloyeeListItem = ({name, salary, increase, id}) => { // сюда передаем props из EmployeesList (они ниже)
     
   let classNames = "list-group-item d-flex justify-content-between"  // переменная с классами
   if (increase) {                               // проверяем increase
@@ -8,7 +8,7 @@ const EmloyeeListItem = ({name, salary, increase}) => { // сюда переда
   }
 
   return (
-    <li className={classNames}> 
+    <li className={classNames} id = {id}> 
             <span className="list-group-item-label">{name}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary + "$"}/>
             <div className='d-flex justify-content-center align-items-center'>

@@ -8,10 +8,13 @@ import EmployeesAddForm from "../app-employees-add-form/app-employees-add-form";
 function App() {          // моковые данные 
   
   const data = [
-    {name: "Alex" , salary: 800, increase: false},
-    {name: "Ivan" , salary: 300, increase: true},
-    {name: "Petr" , salary: 500, increase: false},
+    {name: "Alex" , salary: 800, increase: false, id: 1},
+    {name: "Ivan" , salary: 300, increase: true, id: 2},
+    {name: "Petr" , salary: 500, increase: false, id: 3}
   ]
+
+  // если новый элемент появлется в начале или середине списка, реакт будет перерисовывать все после него
+  // чтобы этого избежать и не менять все подряд используется key
 
 
   return (
