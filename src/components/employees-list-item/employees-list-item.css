@@ -52,12 +52,12 @@
 
 .list-group-item.like .fa-star {
   opacity: 1;
-  transform: translateX(0 px);
+  transform: translateX(0);
 }
 
 .list-group-item.increase .list-group-item-label {
   color: #e09f3e;
-} /* если класс содержит класс increase меняется цвет строки */
+} /* если класс содержит класс increase, то у класса .list-group-item-label меняется цвет */
 
 .list-group-item.increase .list-group-item-input {
   color: #e09f3e;
