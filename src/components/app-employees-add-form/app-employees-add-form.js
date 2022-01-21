@@ -1,18 +1,6 @@
 import { Component } from "react";
 import "./app-employees-add-form.css"
 
-const a = [a,b]
-const b = [a,a,b,b,c,c,d]
-
-let c = 0;
-
-for (let i = 0, i < b.length, i++) {
-  if (b[i] === a[i]) {
-   c++
-  }
-}
-console.log(c)
-
 class EmployeesAddForm extends Component {
     constructor(props) {
       super(props);
