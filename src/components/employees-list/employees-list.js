@@ -10,8 +10,9 @@ const EmployeesList = ({data, onDelete}) => {   // передаем сюда к�
       <EmployeesListItem key={id} name={name} salary={salary} increase={increase}
       onDelete={()=> {         // передаем функцию как props и используем в item
         onDelete(id)
-      }}
-      ></EmployeesListItem> // props из данных с сервера
+      }
+    }
+    ></EmployeesListItem> 
       // <EmployeesListItem key={id} {...itemProps}></EmployeesListItem> // spread оператор разворачивает наш объект
     )
   })
