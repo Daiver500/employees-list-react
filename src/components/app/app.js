@@ -44,7 +44,7 @@ class App extends Component {
     })
   }
 
-  addItem = (name, salary) => {
+  addItem = (name, salary) => {    // добавляем элемент в массив
      const newEmployee = {
         name,
         salary,
@@ -69,9 +69,10 @@ class App extends Component {
         <SearchPanel></SearchPanel>
         <AppFilter></AppFilter>
       </div>
-      <EmployeesList data={this.state.data}  // передаем все вниз по цепочке
-       onDelete={this.deleteItem}
-      ></EmployeesList> {/*передаем массив в компонент как props, теперь можно использовать его внутри компонента */}
+      <EmployeesList 
+        data={this.state.data}  // передаем все вниз по цепочке
+        onDelete={this.deleteItem}>
+      </EmployeesList> {/*передаем массив в компонент как props, теперь можно использовать его внутри компонента */}
       <EmployeesAddForm  onAdd ={this.addItem}></EmployeesAddForm>
     </div>
 )

@@ -5,14 +5,17 @@ const EmployeesList = ({data, onDelete}) => {   // передаем сюда к�
   
   const elements = data.map((item) => {        // каждый объект массива обозначаем как item
     const {name, salary, increase, id} = item
-    // const {id, ...itemProps} = item // к строке со spread оператором ниже
+  // const {id, ...itemProps} = item // к строке со spread оператором ниже
     return (
-      <EmployeesListItem key={id} name={name} salary={salary} increase={increase}
-      onDelete={()=> {         // передаем функцию как props и используем в item
+      <EmployeesListItem 
+      key={id} 
+      name={name} 
+      salary={salary} 
+      increase={increase}
+      onDelete ={()=> {         // передаем функцию как props и используем в item
         onDelete(id)
       }
-    }
-    ></EmployeesListItem> 
+    }></EmployeesListItem> 
       // <EmployeesListItem key={id} {...itemProps}></EmployeesListItem> // spread оператор разворачивает наш объект
     )
   })
