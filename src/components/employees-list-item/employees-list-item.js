@@ -29,8 +29,6 @@ import "./employees-list-item.css"
   )
 }*/
 
-// КЛАССОВЫЙ КОМПОНЕНТ
-
 const EmloyeeListItem = (props) => { 
  
   const {name, salary,  id, deleteItem, onToggleIncrease, onToggleLike, increase ,like} = props
