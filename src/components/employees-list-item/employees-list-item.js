@@ -1,4 +1,3 @@
-import { Component } from "react"
 import "./employees-list-item.css"
 
 // ФУНКЦИОНАЛЬНЫЙ КОМПОНЕНТ
@@ -32,34 +31,9 @@ import "./employees-list-item.css"
 
 // КЛАССОВЫЙ КОМПОНЕНТ
 
-class EmloyeeListItem extends Component { 
-  constructor(props) {
-    super(props);
-    this.state = {                // состояние increase
-      increase: false,            // у всех состояние false
-      like: false
-    }
-  }
-  
-  onIncrease = () => {
-    /*this.setState(({increase}) => ({      // callback, т.к. зависит от прошлого состояния, деструктуризация, тоже самое, что и ниже
-      increase: !increase
-    }))*/
-    
-    this.setState(state => ({            // callback, т.к. зависит от прошлого состояния
-       increase: !state.increase
-    }))
-  }
-
-  onLike = () => {
-    this.setState(({like}) => ({     
-      like: !like
-    }))
-  }
-
-  render() {
-  const {name, salary,  id, onDelete} = this.props
-  const {increase, like} = this.state
+const EmloyeeListItem = (props) => { 
+ 
+  const {name, salary,  id, deleteItem, onToggleIncrease, onToggleLike, increase ,like} = props
 
   let classNames = "list-group-item d-flex justify-content-between"  // переменная с классами
   if (increase) {                               // проверяем increase
@@ -72,19 +46,19 @@ class EmloyeeListItem extends Component {
 
   return (
     <li className={classNames} id = {id}> 
-            <span onClick={this.onLike} className="list-group-item-label">{name}</span>
+            <span onClick={onToggleLike} className="list-group-item-label">{name}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary + "$"}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
                     className="btn-cookie btn-sm "
-                    onClick={this.onIncrease}>
+                    onClick={onToggleIncrease}>
                     <i className="fas fa-cookie"></i>
                 </button>
 
                 <button type="button"
                         className="btn-trash btn-sm ">
                     <i className="fas fa-trash"
-                    onClick={onDelete}
+                    onClick={deleteItem}
                     ></i>
                 </button>
                 <i className="fas fa-star"></i>
@@ -92,7 +66,7 @@ class EmloyeeListItem extends Component {
         </li>
   )
 
- }
+
 }
 
 

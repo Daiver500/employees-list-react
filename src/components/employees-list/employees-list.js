@@ -1,10 +1,10 @@
 import EmployeesListItem from "../employees-list-item/employees-list-item"
 import "./employees-list.css"
 
-const EmployeesList = ({data, onDelete}) => {   // передаем сюда как аргументы данные c app.js
+const EmployeesList = ({data, deleteItem, onToggleLike, onToggleIncrease}) => {   // передаем сюда как аргументы данные c app.js
   
   const elements = data.map((item) => {        // каждый объект массива обозначаем как item
-    const {name, salary, increase, id} = item
+    const {name, salary, increase, like, id} = item
   // const {id, ...itemProps} = item // к строке со spread оператором ниже
     return (
       <EmployeesListItem 
@@ -12,10 +12,11 @@ const EmployeesList = ({data, onDelete}) => {   // передаем сюда к�
       name={name} 
       salary={salary} 
       increase={increase}
-      onDelete ={()=> {         // передаем функцию как props и используем в item
-        onDelete(id)
-      }
-    }></EmployeesListItem> 
+      like={like}
+      deleteItem ={()=> {deleteItem(id)}}  // передаем функцию как props и используем в item
+      onToggleIncrease={()=> {onToggleIncrease(id)}}
+      onToggleLike={()=> {onToggleLike(id)}}
+    ></EmployeesListItem> 
       // <EmployeesListItem key={id} {...itemProps}></EmployeesListItem> // spread оператор разворачивает наш объект
     )
   })

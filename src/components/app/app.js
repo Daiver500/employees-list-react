@@ -11,9 +11,9 @@ class App extends Component {
     super(props);
     this.state = {
       data: [
-        {name: "Alex" , salary: 800, increase: false, id: 1},    // моковые данные 
-        {name: "Ivan" , salary: 300, increase: true, id: 2},
-        {name: "Petr" , salary: 500, increase: false, id: 3}
+        {name: "Alex" , salary: 800, increase: false, like: true,  id: 1},    // моковые данные 
+        {name: "Ivan" , salary: 300, increase: true, like: false, id: 2},
+        {name: "Petr" , salary: 500, increase: false, like: false, id: 3}
       ]
     }
     this.maxId = 4;
@@ -49,6 +49,7 @@ class App extends Component {
         name,
         salary,
         increase: false,
+        like: false,
         id: this.maxId++
      }
      this.setState(({data}) => {    
@@ -57,6 +58,14 @@ class App extends Component {
          data: newArray
        }
      })
+  }
+
+  onToggleIncrease = (id) => {            // изменяет increase на противоположный у определнного элемента по id
+    console.log(`Increase this ${id}`)
+  }
+
+  onToggleLike = (id) => {                         // изменяет like на противоположный у определнного элемента по id
+    console.log(`Like this ${id}`)
   }
  
   // если новый элемент появлется в начале или середине списка, реакт будет перерисовывать все после него
@@ -71,9 +80,12 @@ class App extends Component {
       </div>
       <EmployeesList 
         data={this.state.data}  // передаем все вниз по цепочке
-        onDelete={this.deleteItem}>
+        deleteItem={this.deleteItem}
+        onToggleIncrease={this.onToggleIncrease}
+        onToggleLike={this.onToggleLike}
+        >
       </EmployeesList> {/*передаем массив в компонент как props, теперь можно использовать его внутри компонента */}
-      <EmployeesAddForm  onAdd ={this.addItem}></EmployeesAddForm>
+      <EmployeesAddForm  addItem ={this.addItem}></EmployeesAddForm>
     </div>
 )
   }
