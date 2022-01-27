@@ -61,19 +61,63 @@ class App extends Component {
   }
 
   onToggleIncrease = (id) => {            // изменяет increase на противоположный у определнного элемента по id
-    console.log(`Increase this ${id}`)
+    // СПОСОБ 1
+    /*this.setState(({data})=>{
+      const index = data.findIndex((item) => { return item.id === id});        // находим элементы по id
+      const oldData = data[index];                                           // старая data
+      const newItem = {...oldData, increase: !oldData.increase};              // новый increase не равно increase в старой data
+      const newArray = [...data.slice(0, index), newItem, ...data.slice(index +1)];     // новый массив с новым increase
+
+      return  {
+        data: newArray                // заменяем старый массив с данными на новый
+
+      }      
+    })*/
+
+     // СПОСОБ 2
+     this.setState(({data}) => {
+       return {
+         data: data.map((item) => {      // объект state мы менять не можем, поэтому нужен новый массив
+           if(item.id === id) {         // если мы нашли объект который совпадает по id, то мы вернем новый объект с новым increase
+             return {
+               ...item, increase: !item.increase
+             }
+           }
+           return item;
+         })
+       }
+     })
+
   }
 
   onToggleLike = (id) => {                         // изменяет like на противоположный у определнного элемента по id
-    console.log(`Like this ${id}`)
+    this.setState(({data}) => {
+      return {
+        data: data.map((item) => {      
+          if(item.id === id) {         
+            return {
+              ...item, like: !item.like
+            }
+          }
+          return item;
+        })
+      }
+    })
   }
  
   // если новый элемент появлется в начале или середине списка, реакт будет перерисовывать все после него
   // чтобы этого избежать и не менять все подряд используется key
   render() {
+  const employees = this.state.data.length;                 // находим количество сотрудников
+  const increased = this.state.data.filter((item) => {       // находим у кого есть increase
+    return item.increase
+  })
+
+  const increasedLength = increased.length
+ 
   return (
     <div className="app">
-      <AppHeader></AppHeader>
+      <AppHeader employees={employees} increased={increasedLength}></AppHeader>
       <div className="app-search">
         <SearchPanel></SearchPanel>
         <AppFilter></AppFilter>
