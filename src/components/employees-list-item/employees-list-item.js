@@ -31,7 +31,7 @@ import "./employees-list-item.css"
 
 const EmloyeeListItem = (props) => { 
  
-  const {name, salary,  id, deleteItem, onToggleIncrease, onToggleLike, increase ,like} = props
+  const {name, salary,  id, deleteItem, onToggleProp, increase ,like} = props  //onToggleProp вместо onToggleIncrease, onToggleLike
 
   let classNames = "list-group-item d-flex justify-content-between"  // переменная с классами
   if (increase) {                               // проверяем increase
@@ -44,12 +44,13 @@ const EmloyeeListItem = (props) => {
 
   return (
     <li className={classNames} id = {id}> 
-            <span onClick={onToggleLike} className="list-group-item-label">{name}</span>
+            <span onClick={onToggleProp} className="list-group-item-label" data-toggle="like">{name}</span> {/*через data-toggle будем определять какой атрибут меняем  */}
             <input type="text" className="list-group-item-input" defaultValue={salary + "$"}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
                     className="btn-cookie btn-sm "
-                    onClick={onToggleIncrease}>
+                    onClick={onToggleProp}
+                    data-toggle="increase">
                     <i className="fas fa-cookie"></i>
                 </button>
 

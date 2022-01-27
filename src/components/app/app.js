@@ -60,7 +60,9 @@ class App extends Component {
      })
   }
 
-  onToggleIncrease = (id) => {            // изменяет increase на противоположный у определнного элемента по id
+  // ЗАМЕНИЛИ МЕТОДЫ НА onToggleProps!!!
+
+  /*onToggleIncrease = (id) => {            // изменяет increase на противоположный у определнного элемента по id
     // СПОСОБ 1
     /*this.setState(({data})=>{
       const index = data.findIndex((item) => { return item.id === id});        // находим элементы по id
@@ -72,7 +74,7 @@ class App extends Component {
         data: newArray                // заменяем старый массив с данными на новый
 
       }      
-    })*/
+    })
 
      // СПОСОБ 2
      this.setState(({data}) => {
@@ -103,6 +105,23 @@ class App extends Component {
         })
       }
     })
+  }*/
+
+  // ЗАМЕНА МЕТОДОВ onToggleLike и onToggleIncrease одним
+
+  onToggleProp =(id, prop) => {
+    this.setState(({data}) => {
+      return {
+        data: data.map((item) => {      
+          if(item.id === id) {         
+            return {
+              ...item, [prop]: !item[prop]
+            }
+          }
+          return item;
+        })
+      }
+    })
   }
  
   // если новый элемент появлется в начале или середине списка, реакт будет перерисовывать все после него
@@ -125,8 +144,9 @@ class App extends Component {
       <EmployeesList 
         data={this.state.data}  // передаем все вниз по цепочке
         deleteItem={this.deleteItem}
-        onToggleIncrease={this.onToggleIncrease}
-        onToggleLike={this.onToggleLike}
+        /*onToggleIncrease={this.onToggleIncrease}    // заменили оба на onToggleProp
+        onToggleLike={this.onToggleLike}*/
+        onToggleProp={this.onToggleProp}
         >
       </EmployeesList> {/*передаем массив в компонент как props, теперь можно использовать его внутри компонента */}
       <EmployeesAddForm  addItem ={this.addItem}></EmployeesAddForm>

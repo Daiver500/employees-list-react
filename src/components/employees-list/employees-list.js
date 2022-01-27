@@ -1,7 +1,7 @@
 import EmployeesListItem from "../employees-list-item/employees-list-item"
 import "./employees-list.css"
 
-const EmployeesList = ({data, deleteItem, onToggleLike, onToggleIncrease}) => {   // передаем сюда как аргументы данные c app.js
+const EmployeesList = ({data, deleteItem, onToggleProp}) => {   // передаем сюда как аргументы данные c app.js, onToggleProp вставили вместо onToggleIncrease, onToggleLike
   
   const elements = data.map((item) => {        // каждый объект массива обозначаем как item
     const {name, salary, increase, like, id} = item
@@ -14,8 +14,7 @@ const EmployeesList = ({data, deleteItem, onToggleLike, onToggleIncrease}) => { 
       increase={increase}
       like={like}
       deleteItem ={()=> {deleteItem(id)}}  // передаем функцию как props и используем в item
-      onToggleIncrease={()=> {onToggleIncrease(id)}}
-      onToggleLike={()=> {onToggleLike(id)}}
+      onToggleProp={(evt)=> {onToggleProp(id, evt.currentTarget.getAttribute("data-toggle"))}}
     ></EmployeesListItem> 
       // <EmployeesListItem key={id} {...itemProps}></EmployeesListItem> // spread оператор разворачивает наш объект
     )
