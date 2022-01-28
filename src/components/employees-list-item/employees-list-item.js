@@ -44,7 +44,10 @@ const EmloyeeListItem = (props) => {
 
   return (
     <li className={classNames} id = {id}> 
-            <span onClick={onToggleProp} className="list-group-item-label" data-toggle="like">{name}</span> {/*через data-toggle будем определять какой атрибут меняем  */}
+            <span onClick={onToggleProp} 
+            className="list-group-item-label" 
+            data-toggle="like">{name}
+            </span> {/*через data-toggle будем определять какой атрибут меняем, куда кликаем   */}
             <input type="text" className="list-group-item-input" defaultValue={salary + "$"}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"

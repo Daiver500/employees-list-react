@@ -14,7 +14,8 @@ class App extends Component {
         {name: "Alex" , salary: 800, increase: false, like: true,  id: 1},    // моковые данные 
         {name: "Ivan" , salary: 300, increase: true, like: false, id: 2},
         {name: "Petr" , salary: 500, increase: false, like: false, id: 3}
-      ]
+      ],
+      inputData: ""                    // пустая строка для реализации поиска
     }
     this.maxId = 4;
   }
@@ -109,7 +110,7 @@ class App extends Component {
 
   // ЗАМЕНА МЕТОДОВ onToggleLike и onToggleIncrease одним
 
-  onToggleProp =(id, prop) => {
+  onToggleProp =(id, prop) => {                // метод для переключения по клику в зависимости по какому data-attribute кликнули, передаем ниже
     this.setState(({data}) => {
       return {
         data: data.map((item) => {      
@@ -123,32 +124,47 @@ class App extends Component {
       }
     })
   }
+
+  searchEmployee = (data, inputData) => {               //массив слов
+      if(inputData.length === 0) {
+        return data;
+      }
+      return data.filter((item) => {
+         return item.name.indexOf(inputData) > - 1             // если ничего не находится, то возвращается  -1 или возвращаем совпадения
+      })
+  }
+
+  updateSearchFromApp = (inputData) => {
+     this.setState({inputData: inputData})
+  }
  
   // если новый элемент появлется в начале или середине списка, реакт будет перерисовывать все после него
   // чтобы этого избежать и не менять все подряд используется key
   render() {
+  const {data, inputData} = this.state;
   const employees = this.state.data.length;                 // находим количество сотрудников
   const increased = this.state.data.filter((item) => {       // находим у кого есть increase
     return item.increase
   })
 
   const increasedLength = increased.length
+  const visibleData = this.searchEmployee(data, inputData)    // отображаем данные из массива data
  
   return (
     <div className="app">
       <AppHeader employees={employees} increased={increasedLength}></AppHeader>
       <div className="app-search">
-        <SearchPanel></SearchPanel>
+        <SearchPanel updateSearchFromApp={this.updateSearchFromApp}></SearchPanel>
         <AppFilter></AppFilter>
       </div>
       <EmployeesList 
-        data={this.state.data}  // передаем все вниз по цепочке
+        data={visibleData}  // передаем все вниз по цепочке, передаем массив в компонент как props, теперь можно использовать его внутри компонента 
         deleteItem={this.deleteItem}
         /*onToggleIncrease={this.onToggleIncrease}    // заменили оба на onToggleProp
         onToggleLike={this.onToggleLike}*/
         onToggleProp={this.onToggleProp}
         >
-      </EmployeesList> {/*передаем массив в компонент как props, теперь можно использовать его внутри компонента */}
+      </EmployeesList>
       <EmployeesAddForm  addItem ={this.addItem}></EmployeesAddForm>
     </div>
 )

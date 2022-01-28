@@ -14,7 +14,7 @@ const EmployeesList = ({data, deleteItem, onToggleProp}) => {   // переда�
       increase={increase}
       like={like}
       deleteItem ={()=> {deleteItem(id)}}  // передаем функцию как props и используем в item
-      onToggleProp={(evt)=> {onToggleProp(id, evt.currentTarget.getAttribute("data-toggle"))}}
+      onToggleProp={(evt)=> {onToggleProp(id, evt.currentTarget.getAttribute("data-toggle"))}} // передаем вниз поиск по id и data-attribute
     ></EmployeesListItem> 
       // <EmployeesListItem key={id} {...itemProps}></EmployeesListItem> // spread оператор разворачивает наш объект
     )
