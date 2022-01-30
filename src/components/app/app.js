@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import {Component} from "react"
 import "./app.css";
 import AppHeader from "../app-header/app-header"
@@ -15,7 +16,9 @@ class App extends Component {
         {name: "Ivan" , salary: 300, increase: true, like: false, id: 2},
         {name: "Petr" , salary: 500, increase: false, like: false, id: 3}
       ],
-      inputData: ""                    // пустая строка для реализации поиска
+      inputData: "",                    // пустая строка для реализации поиска
+      filterData: "all"
+
     }
     this.maxId = 4;
   }
@@ -135,27 +138,47 @@ class App extends Component {
   }
 
   updateSearchFromApp = (inputData) => {
-     this.setState({inputData: inputData})
+     this.setState({inputData: inputData})          // сокращенная запись  this.setState({inputData})
+  }
+
+  filterEmployees = (data, filterData) => {
+    switch (filterData) {
+      case "like": 
+      return data.filter((item) => {                 //  сокращенная запись item.filter(item => item.like) 
+        return item.like
+      })
+      case "moreThanThousand": 
+      return data.filter((item) => {                 
+        return item.salary > 1000
+      })
+      default: 
+       return data
+    }
+  }
+
+  filterClick = (filterData) => {
+    this.setState({filterData: filterData})        // сокращенная запись  this.setState({filterData})
   }
  
   // если новый элемент появлется в начале или середине списка, реакт будет перерисовывать все после него
   // чтобы этого избежать и не менять все подряд используется key
+
   render() {
-  const {data, inputData} = this.state;
+  const {data, inputData, filterData} = this.state;
   const employees = this.state.data.length;                 // находим количество сотрудников
   const increased = this.state.data.filter((item) => {       // находим у кого есть increase
     return item.increase
   })
 
   const increasedLength = increased.length
-  const visibleData = this.searchEmployee(data, inputData)    // отображаем данные из массива data
+  const visibleData = this.filterEmployees(this.searchEmployee(data, inputData), filterData)    // фильтруем и отображаем данные из массива data
  
   return (
     <div className="app">
       <AppHeader employees={employees} increased={increasedLength}></AppHeader>
       <div className="app-search">
         <SearchPanel updateSearchFromApp={this.updateSearchFromApp}></SearchPanel>
-        <AppFilter></AppFilter>
+        <AppFilter filterData={filterData} filterClick={this.filterClick}></AppFilter>
       </div>
       <EmployeesList 
         data={visibleData}  // передаем все вниз по цепочке, передаем массив в компонент как props, теперь можно использовать его внутри компонента 
