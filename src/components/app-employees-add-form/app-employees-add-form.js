@@ -1,5 +1,6 @@
 import { Component } from "react";
-import "./app-employees-add-form.css"
+// import "./app-employees-add-form.css"
+import "./app-employees-add-form.scss"              // для использования scss установить пакет nmp i sass --save-dev
 
 class EmployeesAddForm extends Component {
     constructor(props) {

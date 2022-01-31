@@ -34,7 +34,7 @@ const EmloyeeListItem = (props) => {
   const {name, salary,  id, deleteItem, onToggleProp, increase ,like} = props  //onToggleProp вместо onToggleIncrease, onToggleLike
 
   let classNames = "list-group-item d-flex justify-content-between"  // переменная с классами
-  if (increase) {                               // проверяем increase
+  if (increase) {                               // проверяем increase, это динамический класс, строка классов меняется в зависимости от условий
     classNames = classNames + " increase"
   }
 
@@ -46,8 +46,10 @@ const EmloyeeListItem = (props) => {
     <li className={classNames} id = {id}> 
             <span onClick={onToggleProp} 
             className="list-group-item-label" 
-            data-toggle="like">{name}
-            </span> {/*через data-toggle будем определять какой атрибут меняем, куда кликаем   */}
+            data-toggle="like"
+            style={{fontSize: 16, color: "orange"}}                                                                       // инлайн стили, реакт замещает только px, другие значения помещаются в кавычки  style={{fontSize: "46em"}}     
+            >{name}
+            </span>                                                                                {/*через data-toggle будем определять какой атрибут меняем, куда кликаем   */}
             <input type="text" className="list-group-item-input" defaultValue={salary + "$"}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"

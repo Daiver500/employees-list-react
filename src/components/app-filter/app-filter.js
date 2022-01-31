@@ -2,17 +2,23 @@ import "./app-filter.css"
 
 const AppFilter = (props) => {
   const buttonsData = [                            // альтернативный вариант написания кнопок
-    {name: "all", label: "Все сотрудники"},
-    {name: "like", label: "Сотрудники на повышение"},
-    {name: "moreThanThousand", label: " З/П больше $1000"}
+    {name: "all", label: "Все сотрудники", colored: false},
+    {name: "like", label: "Сотрудники на повышение", colored: false},
+    {name: "moreThanThousand", label: " З/П больше $1000", colored: true}
   ]
 
-  const buttons = buttonsData.map(({name, label}) => {
+  const buttons = buttonsData.map(({name, label, colored}) => {
     const activeButton = props.filterData === name;
     const clazz = activeButton ? "btn-light" : "btn-outline-light";
+    const style = colored ? {color: "red"} : null;
     return (
     <button 
-      className={`btn ${clazz} `} type="button" key={name} onClick={()=>props.filterClick(name)}> {label}
+      className={`btn ${clazz} `} 
+      type="button" 
+      key={name} 
+      onClick={()=>props.filterClick(name)}
+      style={style}> 
+      {label}
     </button>
     )
   })
