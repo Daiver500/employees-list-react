@@ -10,7 +10,7 @@ const AppFilter = (props) => {
   const buttons = buttonsData.map(({name, label, colored}) => {
     const activeButton = props.filterData === name;
     const clazz = activeButton ? "btn-light" : "btn-outline-light";
-    const style = colored ? {color: "red"} : null;
+    const style = colored ? {color: "red"} : null;                      // в таких стилях необходимо прописывать вендорные префиксы
     return (
     <button 
       className={`btn ${clazz} `} 
