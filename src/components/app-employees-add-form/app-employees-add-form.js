@@ -2,6 +2,19 @@ import { Component } from "react";
 // import "./app-employees-add-form.css"
 import "./app-employees-add-form.scss"              // для использования scss установить пакет nmp i sass --save-dev
 
+/* Использование класса без конструктора (все остальное ниже остается также)
+
+  class EmployeesAddForm extends Component {
+  
+      state = {
+        name: "",
+        salary: ""
+      }  
+}
+
+export default EmployeesAddForm;
+*/
+
 class EmployeesAddForm extends Component {
     constructor(props) {
       super(props);
@@ -26,6 +39,12 @@ class EmployeesAddForm extends Component {
           salary: ''
       })
   }
+
+  static test = () => {              
+    console.log("Hello")
+  }
+
+  static logged = "on"
 
     render () {
         const {name,salary} = this.state
@@ -57,5 +76,8 @@ class EmployeesAddForm extends Component {
     }
     
 }
+
+EmployeesAddForm.test()
+console.log(EmployeesAddForm.logged)
 
 export default EmployeesAddForm;
